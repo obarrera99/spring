@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "12283b70-c358-4d4c-9b44-3cdd0787d4ac",
+		"name": "angularIntegration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"123\",\n    \"data\":{\n        \"nombre\":\"Omar\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera@indracompany.com\"\n    }\n}",
+					"options": {
+						"formdata": {},
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8071/createData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"createData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readAllData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8071/readAllData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"readAllData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readData",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8071/readData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"readData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateData",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"123\",\n    \"data\":{\n        \"nombre\":\"Adriana\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera99@indracompany.com\"\n    }\n}",
+					"options": {
+						"formdata": {},
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8071/updateData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"updateData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAllData",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8071/deleteAllData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"deleteAllData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteData",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8071/deleteData",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"deleteData"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
