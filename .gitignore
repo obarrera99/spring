@@ -29,3 +29,34 @@ build/
 
 ### VS Code ###
 .vscode/
+bin/.DS_Store
+bin/.gitignore
+bin/mvnw
+bin/mvnw.cmd
+bin/pom.xml
+bin/.mvn/wrapper/maven-wrapper.jar
+bin/.mvn/wrapper/maven-wrapper.properties
+bin/.mvn/wrapper/MavenWrapperDownloader.class
+bin/postman/angularIntegration.postman_collection.json
+bin/src/.DS_Store
+bin/src/main/.DS_Store
+bin/src/main/java/.DS_Store
+bin/src/main/java/com/.DS_Store
+bin/src/main/java/com/demo/.DS_Store
+bin/src/main/java/com/demo/integration/.DS_Store
+bin/src/main/java/com/demo/integration/IntegrationApplication.class
+bin/src/main/java/com/demo/integration/controller/IntegrationController.class
+bin/src/main/java/com/demo/integration/domain/.DS_Store
+bin/src/main/java/com/demo/integration/domain/ApiExceptionHandler.class
+bin/src/main/java/com/demo/integration/domain/ApiRequestException.class
+bin/src/main/java/com/demo/integration/domain/enumeration/ErrorEnum.class
+bin/src/main/java/com/demo/integration/domain/service/IStorageService.class
+bin/src/main/java/com/demo/integration/domain/service/StoreService.class
+bin/src/main/java/com/demo/integration/domain/utils/LevelsConstantes.class
+bin/src/main/java/com/demo/integration/exception/ChunkException.class
+bin/src/main/java/com/demo/integration/model/DataDTO.class
+bin/src/main/java/com/demo/integration/model/DefaultErrorDTO.class
+bin/src/main/java/com/demo/integration/model/DefaultErrorListDTO.class
+bin/src/main/resources/.DS_Store
+bin/src/main/resources/application.yml
+bin/src/test/java/com/demo/integration/IntegrationApplicationTests.class
