@@ -192,6 +192,62 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "createAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"obarrera99@gmail.com\",\n    \"password\":\"omar\",\n    \"nombre\":\"Omar Barrera\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8071/createAccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"createAccount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validaAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"obarrera99@gmail.com\",\n    \"password\":\"omar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8071/validaAccount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8071",
+					"path": [
+						"validaAccount"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

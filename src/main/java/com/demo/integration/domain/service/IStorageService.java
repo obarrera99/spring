@@ -3,6 +3,7 @@ package com.demo.integration.domain.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.demo.integration.model.CreateAccountDTO;
 import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
@@ -21,6 +22,22 @@ public interface IStorageService {
 	 * @return boolean, true= si el guardado fue exitoso
 	 */
 	boolean createData(CreateDTO data);
+	
+	/**
+	 * Metodo que guarda el registro
+	 * 
+	 * @param data datos del registro
+	 * @return boolean, true= si el guardado fue exitoso
+	 */
+	boolean createAccount(CreateAccountDTO data);
+	
+	/**
+	 * Metodo que guarda el registro
+	 * 
+	 * @param data datos del registro
+	 * @return boolean, true= si el guardado fue exitoso
+	 */
+	boolean validaAccount(CreateAccountDTO data);
 
 	/**
 	 * Metodo que retorna todos los elementos almacenados

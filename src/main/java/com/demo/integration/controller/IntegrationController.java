@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.demo.integration.domain.service.IStorageService;
+import com.demo.integration.model.CreateAccountDTO;
 import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
@@ -62,6 +63,47 @@ public class IntegrationController {
 		return new ResponseEntity<>(mensaje, code);
 	}
 
+	/**
+	 * EndPoint que guarda el registro
+	 * 
+	 * @param data
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@PostMapping(value = "/createAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> createAccount(
+			@RequestBody(required = true) CreateAccountDTO data,
+			RedirectAttributes redirectAttributes) {
+		String mensaje = "error";
+		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
+		if (storageService.createAccount(data)) {
+			code = HttpStatus.OK;
+			mensaje = "Correcto";
+		}
+		return new ResponseEntity<>(mensaje, code);
+	}
+	
+	/**
+	 * EndPoint que guarda el registro
+	 * 
+	 * @param data
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@PostMapping(value = "/validaAccount", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> validaAccount(
+			@RequestBody(required = true) CreateAccountDTO data,
+			RedirectAttributes redirectAttributes) {
+		String mensaje = "error";
+		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
+		if (storageService.validaAccount(data)) {
+			code = HttpStatus.OK;
+			mensaje = "Correcto";
+		}
+		return new ResponseEntity<>(mensaje, code);
+	}
+
+	
 	/**
 	 * EndPoint que obtiene todos los registros
 	 * 

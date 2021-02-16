@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
+
+import com.demo.integration.model.CreateAccountDTO;
 import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
@@ -29,6 +31,12 @@ public class StoreService implements IStorageService {
 	 * Variable con los datos almacenados
 	 */
 	private static List<DataDTO> subjectsLoaded = new ArrayList<>();
+	
+	
+	/**
+	 * Variable con las cuentas almacenadas
+	 */
+	private static List<CreateAccountDTO> cuentasRegistradas = new ArrayList<>();
 
 	/**
 	 * Metodo que guarda el registro
@@ -44,6 +52,42 @@ public class StoreService implements IStorageService {
 				.filter(x -> dd.getId().equalsIgnoreCase(x.getId())).findFirst().orElse(null);
 		if (existe == null) {
 			subjectsLoaded.add(dd);
+			result = true;
+		}
+		return result;
+	}
+	
+	/**
+	 * Metodo que guarda el registro
+	 * 
+	 * @param data datos del registro
+	 * @return boolean, true= si el guardado fue exitoso
+	 */
+	public boolean createAccount(CreateAccountDTO data) {
+		boolean result = false;
+		CreateAccountDTO existe = cuentasRegistradas.stream().
+				filter(x -> data.getEmail().equalsIgnoreCase(x.getEmail()))
+				.findFirst().orElse(null);
+		if (existe == null) {
+			cuentasRegistradas.add(data);
+			result = true;
+		}
+		return result;
+	}
+	
+	/**
+	 * Metodo que guarda el registro
+	 * 
+	 * @param data datos del registro
+	 * @return boolean, true= si el guardado fue exitoso
+	 */
+	public boolean validaAccount(CreateAccountDTO data) {
+		boolean result = false;
+		CreateAccountDTO existe = cuentasRegistradas.stream()
+				.filter(x -> data.getEmail().equalsIgnoreCase(x.getEmail()))
+				.filter(x -> data.getPassword().equals(x.getPassword()))
+				.findFirst().orElse(null);
+		if (existe != null) {
 			result = true;
 		}
 		return result;
