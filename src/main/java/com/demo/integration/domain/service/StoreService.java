@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
-
+import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
 /**
@@ -36,12 +36,14 @@ public class StoreService implements IStorageService {
 	 * @param data datos del registro
 	 * @return boolean, true= si el guardado fue exitoso
 	 */
-	public boolean createData(DataDTO data) {
+	public boolean createData(CreateDTO data) {
 		boolean result = false;
-		DataDTO existe = subjectsLoaded.stream().filter(x -> data.getId().equalsIgnoreCase(x.getId())).findFirst()
-				.orElse(null);
+		String generatedString = RandomStringUtils.randomAlphanumeric(16);
+		DataDTO dd = new DataDTO(generatedString, data.getUser(),data.getCategoria(), data.getData());
+		DataDTO existe = subjectsLoaded.stream().filter(x -> dd.getUser().equalsIgnoreCase(x.getUser()))
+				.filter(x -> dd.getId().equalsIgnoreCase(x.getId())).findFirst().orElse(null);
 		if (existe == null) {
-			subjectsLoaded.add(data);
+			subjectsLoaded.add(dd);
 			result = true;
 		}
 		return result;
@@ -52,8 +54,18 @@ public class StoreService implements IStorageService {
 	 * 
 	 * @return lista de datos
 	 */
-	public List<DataDTO> readAllData() {
-		return subjectsLoaded.stream().collect(Collectors.toList());
+	public List<DataDTO> readAllData(String user,String categoria) {
+		if(categoria==null || categoria.isEmpty()) {
+			return subjectsLoaded.stream()
+					.filter(x -> user.equalsIgnoreCase(x.getUser()))
+					.collect(Collectors.toList());
+		}else {
+			return subjectsLoaded.stream()
+					.filter(x -> user.equalsIgnoreCase(x.getUser()))
+					.filter(x -> categoria.equalsIgnoreCase(x.getCategoria()))
+					.collect(Collectors.toList());
+		}
+		
 	}
 
 	/**
@@ -62,8 +74,11 @@ public class StoreService implements IStorageService {
 	 * @param id, identificador del registro a obtener
 	 * @return datos del registro
 	 */
-	public DataDTO readData(String id) {
-		return subjectsLoaded.stream().filter(x -> id.equalsIgnoreCase(x.getId())).findFirst().orElse(null);
+	public DataDTO readData(String id,String user) {
+		return subjectsLoaded.stream()
+				.filter(x -> user.equalsIgnoreCase(x.getUser()))
+				.filter(x -> id.equalsIgnoreCase(x.getId()))
+				.findFirst().orElse(null);
 	}
 
 	/**
@@ -90,7 +105,7 @@ public class StoreService implements IStorageService {
 	 * @return boolean, true si el registro se elimino correctamente
 	 */
 	public boolean deleteData(String id) {
-		return subjectsLoaded.removeIf(x -> x.getId().equalsIgnoreCase(id));
+		return subjectsLoaded.removeIf(x -> id.equalsIgnoreCase(x.getId()));
 	}
 
 	/**
@@ -98,8 +113,17 @@ public class StoreService implements IStorageService {
 	 * 
 	 * @return boolean,true si se eliminaron los registros de manera correcta
 	 */
-	public boolean deleteAllData() {
-		return subjectsLoaded.removeAll(subjectsLoaded);
+	public boolean deleteAllData(String user,String categoria) {
+		if(categoria==null || categoria.isEmpty()) {
+			return subjectsLoaded.removeIf(x -> x.getUser().equalsIgnoreCase(user));
+		}else {
+			return subjectsLoaded.removeAll(
+					subjectsLoaded.stream()
+					.filter(x -> user.equalsIgnoreCase(x.getUser()))
+					.filter(x -> categoria.equalsIgnoreCase(x.getCategoria()))
+					.collect(Collectors.toList()));
+		}
+		
 	}
 
 }

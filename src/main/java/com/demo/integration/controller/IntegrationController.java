@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.demo.integration.domain.service.IStorageService;
+import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
 /**
  * Clase de tipo RestController
+ * 
  * @author OmarBarrera
  */
 @RestController
@@ -43,12 +45,13 @@ public class IntegrationController {
 
 	/**
 	 * EndPoint que guarda el registro
+	 * 
 	 * @param data
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@PostMapping(value = "/createData", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> createData(@RequestBody(required = true) DataDTO data,
+	public ResponseEntity<?> createData(@RequestBody(required = true) CreateDTO data,
 			RedirectAttributes redirectAttributes) {
 		String mensaje = "error";
 		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
@@ -61,25 +64,30 @@ public class IntegrationController {
 
 	/**
 	 * EndPoint que obtiene todos los registros
+	 * 
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@GetMapping(value = "/readAllData", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<DataDTO> readAllData(RedirectAttributes redirectAttributes) {
-		return storageService.readAllData();
+	public List<DataDTO> readAllData(
+			@RequestParam(value = "user", required = true) String user,
+			@RequestParam(value = "categoria", required = false) String categoria,
+			RedirectAttributes redirectAttributes) {
+		return storageService.readAllData(user,categoria);
 	}
 
 	/**
 	 * EndPoint que obtiene un registro con identificador id
+	 * 
 	 * @param id
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@GetMapping(value = "/readData", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> readData(@Valid @RequestParam(value = "id", required = true) String id,
-			RedirectAttributes redirectAttributes) {
+			@Valid @RequestParam(value = "user", required = true) String user, RedirectAttributes redirectAttributes) {
 		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
-		DataDTO data = storageService.readData(id);
+		DataDTO data = storageService.readData(id, user);
 		if (data != null) {
 			code = HttpStatus.OK;
 		}
@@ -88,12 +96,14 @@ public class IntegrationController {
 
 	/**
 	 * EndPoint que actualiza el registro data
+	 * 
 	 * @param data
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@PutMapping(value = "/updateData", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateData(@RequestBody(required = true) DataDTO data,
+	public ResponseEntity<?> updateData(
+			@RequestBody(required = true) DataDTO data,
 			RedirectAttributes redirectAttributes) {
 		String mensaje = "error";
 		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
@@ -106,14 +116,18 @@ public class IntegrationController {
 
 	/**
 	 * EndPoint que elimina todos los registros
+	 * 
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@DeleteMapping(value = "/deleteAllData", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> deleteAllData(RedirectAttributes redirectAttributes) {
+	public ResponseEntity<?> deleteAllData(
+			@Valid @RequestParam(value = "user", required = true) String user,
+			@Valid @RequestParam(value = "categoria", required = false) String categoria,
+			RedirectAttributes redirectAttributes) {
 		String mensaje = "error";
 		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;
-		if (storageService.deleteAllData()) {
+		if (storageService.deleteAllData(user,categoria)) {
 			code = HttpStatus.OK;
 			mensaje = "Correcto";
 		}
@@ -122,12 +136,14 @@ public class IntegrationController {
 
 	/**
 	 * EndPoint que elimina el registro con identificador id
+	 * 
 	 * @param id
 	 * @param redirectAttributes
 	 * @return
 	 */
 	@DeleteMapping(value = "/deleteData", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> deleteData(@Valid @RequestParam(value = "id", required = true) String id,
+	public ResponseEntity<?> deleteData(
+			@Valid @RequestParam(value = "id", required = true) String id,
 			RedirectAttributes redirectAttributes) {
 		String mensaje = "error";
 		HttpStatus code = HttpStatus.NOT_ACCEPTABLE;

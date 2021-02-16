@@ -2,6 +2,8 @@ package com.demo.integration.domain.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+
+import com.demo.integration.model.CreateDTO;
 import com.demo.integration.model.DataDTO;
 
 /**
@@ -18,14 +20,14 @@ public interface IStorageService {
 	 * @param data datos del registro
 	 * @return boolean, true= si el guardado fue exitoso
 	 */
-	boolean createData(DataDTO data);
+	boolean createData(CreateDTO data);
 
 	/**
 	 * Metodo que retorna todos los elementos almacenados
 	 * 
 	 * @return lista de datos
 	 */
-	List<DataDTO> readAllData();
+	List<DataDTO> readAllData(String user,String categoria);
 
 	/**
 	 * Metodo que retorna los datos del registro
@@ -33,7 +35,7 @@ public interface IStorageService {
 	 * @param id, identificador del registro a obtener
 	 * @return datos del registro
 	 */
-	DataDTO readData(String id);
+	DataDTO readData(String id,String user);
 
 	/**
 	 * Metodo que actualiza el registro
@@ -56,6 +58,6 @@ public interface IStorageService {
 	 * 
 	 * @return boolean,true si se eliminaron los registros de manera correcta
 	 */
-	boolean deleteAllData();
+	boolean deleteAllData(String user,String categoria);
 
 }
