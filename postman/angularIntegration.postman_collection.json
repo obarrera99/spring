@@ -12,9 +12,8 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\":\"123\",\n    \"data\":{\n        \"nombre\":\"Omar\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera@indracompany.com\"\n    }\n}",
+					"raw": "{\n    \"user\":\"omarBarrera\",\n    \"categoria\":\"login\",\n    \"data\":{ \n        \"nombre\":\"Omar\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera@minsait.com\"\n    }\n}",
 					"options": {
-						"formdata": {},
 						"raw": {
 							"language": "json"
 						}
@@ -40,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8071/readAllData",
+					"raw": "http://localhost:8071/readAllData?user=omarBarrera",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -48,6 +47,19 @@
 					"port": "8071",
 					"path": [
 						"readAllData"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "omarBarrera",
+							"description": "Nombre del usuario"
+						},
+						{
+							"key": "categoria",
+							"value": "login",
+							"description": "opcional, filtra x categoria deseada",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -66,7 +78,14 @@
 					"formdata": [
 						{
 							"key": "id",
-							"value": "123",
+							"value": "f7rw0D8ZIHs8Vc9K",
+							"description": "identificador del registro obtenido x readAllData",
+							"type": "text"
+						},
+						{
+							"key": "user",
+							"value": "omarBarrera",
+							"description": "Nombre del usuario",
 							"type": "text"
 						}
 					]
@@ -92,9 +111,8 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\":\"123\",\n    \"data\":{\n        \"nombre\":\"Adriana\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera99@indracompany.com\"\n    }\n}",
+					"raw": "{\n    \"id\":\"f7rw0D8ZIHs8Vc9K\",\n    \"user\":\"omarBarrera\",\n    \"categoria\":\"login\",\n    \"data\":{\n        \"nombre\":\"Omar BV\",\n        \"apellidoPat\":\"Barrera\",\n        \"apellidoMat\":\"Valentin\",\n        \"email\":\"obarrera99@minsait.com\"\n    }\n}",
 					"options": {
-						"formdata": {},
 						"raw": {
 							"language": "json"
 						}
@@ -120,7 +138,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8071/deleteAllData",
+					"raw": "http://localhost:8071/deleteAllData?user=omarBarrera&categoria=login",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -128,6 +146,18 @@
 					"port": "8071",
 					"path": [
 						"deleteAllData"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "omarBarrera",
+							"description": "Nombre del usuario"
+						},
+						{
+							"key": "categoria",
+							"value": "login",
+							"description": "opcional, filtra x categoria deseada"
+						}
 					]
 				}
 			},
@@ -140,16 +170,10 @@
 				"header": [],
 				"body": {
 					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "id",
-							"value": "123",
-							"type": "text"
-						}
-					]
+					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:8071/deleteData",
+					"raw": "http://localhost:8071/deleteData?id=dCxL3G6PKbNzNGm6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -157,11 +181,17 @@
 					"port": "8071",
 					"path": [
 						"deleteData"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "dCxL3G6PKbNzNGm6",
+							"description": "Identificador del registro a eliminar"
+						}
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
